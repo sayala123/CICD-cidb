@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages{
+        stage('build'){
+            step {
+                echo 'build stage automatically'
+                sh 'mvn clean install'
+
+            }
+        }
+        stage ('deploy'){
+            steps {
+                echo 'deploy'
+                sh 'sudo cp var/lib/jenkins/.m2/repository/example/demo/Helloworld/1.0-SNAPSHOT/Helloword-1.0-SNAPSHOT.war /opt/apache-tomcat-10.1.7/webapps'
+            }
+        }
+        stage('test') {
+            steps{
+                echo 'test'
+
+            }
+        }
+    }
+
+}
